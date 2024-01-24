@@ -61,7 +61,7 @@
         "path_type": "hardlink",
         "prefix_placeholder": "C:/b/abs_f0exso0psj/croot/zlib_1666594998929/_h_env",
         "sha256": "89cbf97aa827ee1bbf42c895a2e94a615c5df17ccb2ec9d5f34c3776ff5057c1",
-        "sha256_in_prefix": "dfde8a15da29664040e3f15d7bd214a4a9d4992d019a3ae1fb2646504ee309ec",
+        "sha256_in_prefix": "28283b892f95d9cb39f9632f2f8339d7667b50057dfc4018d8d67c21b403a2a3",
         "size_in_bytes": 520
       },
       {
@@ -109,7 +109,7 @@
     ],
     "paths_version": 1
   },
-  "requested_spec": "None",
+  "requested_spec": "zlib",
   "sha256": "af28437d7bbce2beaa058d7882c3e4b6b264a1e0ce9b9aa604e21cf5e57f09d3",
   "size": 116215,
   "subdir": "win-64",

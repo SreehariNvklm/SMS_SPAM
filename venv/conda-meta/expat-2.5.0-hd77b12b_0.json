@@ -147,7 +147,7 @@
     ],
     "paths_version": 1
   },
-  "requested_spec": "None",
+  "requested_spec": "expat",
   "sha256": "fc769ebd107d4ebf05766549b443d00d1db450aa6a2710f9e072a3b359f2d0a0",
   "size": 230455,
   "subdir": "win-64",

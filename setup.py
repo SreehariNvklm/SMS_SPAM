@@ -4,7 +4,7 @@ def get_requirements(path):
     requirements = []
     with open(path) as file_obj:
         requirements = file_obj.readlines()
-        requirements = [requirements.replace("\n","")]
+        requirements = [req.replace("\n","") for req in requirements]
 
         if "-e ." in requirements:
             requirements.remove("-e .")
