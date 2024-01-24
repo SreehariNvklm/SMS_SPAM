@@ -4,7 +4,7 @@ from src.exception import CustomException
 from src.logger import logging
 
 import pandas as pd
-import numpy as pd
+import numpy as np
 from dataclasses import dataclass
 
 from sklearn.model_selection import train_test_split
@@ -18,12 +18,13 @@ class DataIngestionConfig:
 class DataIngestion:
     def __init__(self):
         self.ingestion_config = DataIngestionConfig()
+
     def initiate_data_ingestion(self):
         logging.info('Entered the data ingestion initialization')
         try:
-            logging.info('Reading the dataset')
-            df = pd.read_csv('notebook/data/spam.csv',encoding="ISO-8859-1")
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
+            logging.info('Reading the dataset')
+            df = pd.read_csv('notebook\data\spam.csv',encoding="ISO-8859-1")
 
             logging.info('Removing the unnecessary columns from the dataset')
             df = df.drop(['Unnamed: 2','Unnamed: 3','Unnamed: 4'],axis=1)
@@ -42,7 +43,7 @@ class DataIngestion:
                 self.ingestion_config.test_data_path
             )
         except Exception as e:
-            CustomException(e,sys)
+            raise CustomException(e,sys)
 
 if __name__=="__main__":
     obj = DataIngestion()
