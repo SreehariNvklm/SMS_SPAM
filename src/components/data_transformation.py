@@ -32,12 +32,17 @@ class DataTransformation:
             X_test = test_data.drop(target_col,axis=1)
             y_test = test_data[target_col]
 
+
             logging.info("Train test split done")
 
             tfidf = TfidfVectorizer(stop_words="english")
 
-            X_train_tfidf = tfidf.fit_transform(X_train)
+            tfidf.fit(X_train)
+            X_train_tfidf = tfidf.transform(X_train)
             X_test_tfidf = tfidf.transform(X_test)
+            
+            print(X_train_tfidf.shape)
+            print(y_train.shape)
 
             logging.info('Applied TfIdf vectorizer on data')           
             
