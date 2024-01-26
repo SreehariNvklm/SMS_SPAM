@@ -5,18 +5,20 @@ from src.logger import logging
 
 import pandas as pd
 import numpy as np
-from dataclasses import dataclass
 
 from sklearn.model_selection import train_test_split
 
+from src.components.data_transformation import DataTransformationConfig
 from src.components.data_transformation import DataTransformation
+
+from src.components.model_trainer import ModelTrainerConfig
 from src.components.model_trainer import ModelTrainer
 
-@dataclass(init=True)
 class DataIngestionConfig:
-    train_data_path: str = os.path.join('artifacts','train.csv')
-    test_data_path: str = os.path.join('artifacts','test.csv')
-    raw_data_path: str = os.path.join('artifacts','data.csv')
+    def __init__(self):
+        self.train_data_path: str = os.path.join('artifacts','train.csv')
+        self.test_data_path: str = os.path.join('artifacts','test.csv')
+        self.raw_data_path: str = os.path.join('artifacts','data.csv')
 
 class DataIngestion:
     def __init__(self):
@@ -27,7 +29,7 @@ class DataIngestion:
         try:
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
             logging.info('Reading the dataset')
-            df = pd.read_csv("C:/Users/user/OneDrive/Desktop/ML/SMS_SPAM_MODEL/notebook/data/spam.csv",encoding="ISO-8859-1")
+            df = pd.read_csv("notebook/data/spam.csv",encoding="ISO-8859-1")
 
             logging.info('Removing the unnecessary columns from the dataset')
             df = df.drop(['Unnamed: 2','Unnamed: 3','Unnamed: 4'],axis=1)

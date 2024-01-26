@@ -3,15 +3,14 @@ import pandas as pd
 import sys
 import os
 
-from dataclasses import dataclass
 from src.exception import CustomException
 from src.logger import logging
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-@dataclass
 class DataTransformationConfig:
-    preprocessor_file_path:str = os.path.join('artifacts','preprocessor.pkl')
+    def __init__(self):
+        self.preprocessor_file_path:str = os.path.join('artifacts','preprocessor.pkl')
 
 class DataTransformation:
     def __init__(self):
@@ -26,32 +25,34 @@ class DataTransformation:
             logging.info('Read train and test set data')
             
             target_col = 'result'
+            sms_col = 'sms'
             X_train = train_data.drop(target_col,axis=1)
-            y_train = train_data[target_col]
+            y_train = train_data.drop(sms_col,axis=1)
 
             X_test = test_data.drop(target_col,axis=1)
-            y_test = test_data[target_col]
+            y_test = test_data.drop(sms_col,axis=1)
 
 
             logging.info("Train test split done")
 
+            print(X_train)
+            print(y_train)
+            print(X_test)
+            print(y_test)
+
             tfidf = TfidfVectorizer(stop_words="english")
 
-            tfidf.fit(X_train)
-            X_train_tfidf = tfidf.transform(X_train)
+            X_train_tfidf = tfidf.fit_transform(train_data.drop(target_col,axis=1))
             X_test_tfidf = tfidf.transform(X_test)
-            
-            print(X_train_tfidf.shape)
-            print(y_train.shape)
 
             logging.info('Applied TfIdf vectorizer on data')           
             
             logging.info("Data transformation done")
             return(
                 X_train_tfidf,
-                y_train,
+                y_train.transpose(),
                 X_test_tfidf,
-                y_test
+                y_test.transpose()
             )
         except Exception as e:
             raise CustomException(e,sys)

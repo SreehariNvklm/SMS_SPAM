@@ -7,14 +7,12 @@ from src.exception import CustomException
 from src.logger import logging
 from src.utils import evaluate_model
 
-from dataclasses import dataclass
-
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import MultinomialNB
 
-@dataclass(init=True)
 class ModelTrainerConfig:
-    trained_model_filepath: str = os.path.join('artifacts','model.pkl')
+    def __init__(self):
+        self.trained_model_filepath: str = os.path.join('artifacts','model.pkl')
 
 class ModelTrainer:
     def __init__(self):
