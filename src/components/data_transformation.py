@@ -27,32 +27,26 @@ class DataTransformation:
             target_col = 'result'
             sms_col = 'sms'
             X_train = train_data.drop(target_col,axis=1)
-            y_train = train_data.drop(sms_col,axis=1)
+            y_train = train_data['result']
 
             X_test = test_data.drop(target_col,axis=1)
-            y_test = test_data.drop(sms_col,axis=1)
-
+            y_test = test_data['result']
 
             logging.info("Train test split done")
 
-            print(X_train)
-            print(y_train)
-            print(X_test)
-            print(y_test)
+            tfidf = TfidfVectorizer()
 
-            tfidf = TfidfVectorizer(stop_words="english")
-
-            X_train_tfidf = tfidf.fit_transform(train_data.drop(target_col,axis=1))
+            X_train_tfidf = tfidf.fit_transform(X_train)
             X_test_tfidf = tfidf.transform(X_test)
 
-            logging.info('Applied TfIdf vectorizer on data')           
+            logging.info('Applied TfIdf vectorizer on data')
             
             logging.info("Data transformation done")
             return(
                 X_train_tfidf,
-                y_train.transpose(),
+                y_train,
                 X_test_tfidf,
-                y_test.transpose()
+                y_test
             )
         except Exception as e:
             raise CustomException(e,sys)
