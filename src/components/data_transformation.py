@@ -25,7 +25,6 @@ class DataTransformation:
             logging.info('Read train and test set data')
             
             target_col = 'result'
-            sms_col = 'sms'
             X_train = train_data.drop(target_col,axis=1)
             y_train = train_data['result']
 
@@ -34,10 +33,24 @@ class DataTransformation:
 
             logging.info("Train test split done")
 
+            print(X_train.shape)
+            print(y_train)
+            print(X_test.shape)
+            print(y_test)
+
             tfidf = TfidfVectorizer()
+
+            X_train = np.array(X_train).reshape(1,-1).transpose()
+            X_test = np.array(X_test).reshape(1,-1).transpose()
 
             X_train_tfidf = tfidf.fit_transform(X_train)
             X_test_tfidf = tfidf.transform(X_test)
+
+            print('After tfidf transformation')
+            print(X_train_tfidf.shape)
+            print(y_train.shape)
+            print(X_test_tfidf.shape)
+            print(y_test.shape)
 
             logging.info('Applied TfIdf vectorizer on data')
             

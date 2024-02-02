@@ -21,10 +21,12 @@ class ModelTrainer:
     def initiate_model_trainer(self,X_train_arr,y_train_arr,X_test_arr,y_test_arr):
         try:
             logging.info('Train and test data loaded')
+
+
             X_train = X_train_arr
-            y_train = np.array(y_train_arr)
+            y_train = y_train_arr.transpose()
             X_test = X_test_arr
-            y_test = np.array(y_test_arr)
+            y_test = y_test_arr.transpose()
 
             # models={
             #     "Random Forest Classifier": RandomForestClassifier(),
@@ -40,7 +42,7 @@ class ModelTrainer:
             # best_model = models[best_model_name]
             # print(best_score)
 
-            model = MultinomialNB()
+            model = MultinomialNB(force_alpha=True)
             model.fit(X_train,y_train)
             y_pred = model.predict(X_test)
             f1_score(y_test,y_pred)
