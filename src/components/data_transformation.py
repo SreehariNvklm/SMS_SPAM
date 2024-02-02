@@ -40,8 +40,8 @@ class DataTransformation:
 
             tfidf = TfidfVectorizer()
 
-            X_train = np.array(X_train).reshape(1,-1).transpose()
-            X_test = np.array(X_test).reshape(1,-1).transpose()
+            X_train = np.array(X_train).reshape(1,-1).transpose().ravel()
+            X_test = np.array(X_test).reshape(1,-1).transpose().ravel()
 
             X_train_tfidf = tfidf.fit_transform(X_train)
             X_test_tfidf = tfidf.transform(X_test)
