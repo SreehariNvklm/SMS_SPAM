@@ -40,6 +40,8 @@ class ModelTrainer:
 
             best_model = models[best_model_name]
             print(best_score,"-",best_model_name)
+            log_msg = "Best model found- "+best_model_name+" with precision score- "+str(best_score)
+            logging.info(log_msg)
 
 
         except Exception as e:
