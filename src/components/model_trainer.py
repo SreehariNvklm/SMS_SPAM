@@ -5,7 +5,7 @@ import sys
 
 from src.exception import CustomException
 from src.logger import logging
-from src.utils import evaluate_model
+from src.utils import evaluate_model, save_obj
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import MultinomialNB
@@ -41,7 +41,11 @@ class ModelTrainer:
             best_model = models[best_model_name]
             print(best_score,"-",best_model_name)
             log_msg = "Best model found- "+best_model_name+" with precision score- "+str(best_score)
-            logging.info(log_msg)
+            logging.info(log_msg)     
+
+            save_obj(os.path.join('artifacts','model.pkl'),best_model)     
+
+            return best_model
 
 
         except Exception as e:

@@ -5,6 +5,7 @@ import os
 
 from src.exception import CustomException
 from src.logger import logging
+from src.utils import save_obj
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -51,6 +52,8 @@ class DataTransformation:
             print(y_train.shape)
             print(X_test_tfidf.shape)
             print(y_test.shape)
+
+            save_obj(self.data_transformation_config.preprocessor_file_path,tfidf)
 
             logging.info('Applied TfIdf vectorizer on data')
             
